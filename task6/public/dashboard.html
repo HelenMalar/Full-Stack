@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h2>User Dashboard</h2>
+<input type="text" id="name" placeholder="Enter Name"><br>
+<input type="number" id="age" placeholder="Enter Age"><br>
+<button onclick="submitForm()">Submit</button><br><br>
+<h3>Data Retrieved from DB:</h3>
+<ul id="dataList"></ul>
+<button onclick="logout()">Logout</button>
+</div>
+<script>
+if (!localStorage.getItem("token")) {
+    alert("Please login first");
+    window.location.href = "login.html";
+}
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+async function submitForm() {
+    const res = await fetch("http://localhost:3000/api/form", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+            name: document.getElementById("name").value,
+            age: document.getElementById("age").value
+        })
+    });
+    const data = await res.json();
+    alert(data.message);
+    loadData();
+}
+async function loadData() {
+    const res = await fetch("http://localhost:3000/api/form", {
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    });
+    const data = await res.json();
+    const list = document.getElementById("dataList");
+    list.innerHTML = "";
+    data.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `Name: ${item.data.name}, Age: ${item.data.age}`;
+        list.appendChild(li);
+    });
+}
+loadData();
+</script>
+</body>
+</html>

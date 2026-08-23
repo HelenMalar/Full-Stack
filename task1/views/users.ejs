@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <h2>Registered Users</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.age %></td>
+                <td><%= user.city %></td>
+            </tr>
+        <% }) %>
+    </table>
+    <br>
+    <div class="button-container"><a href="/" class="result-btn">Back to Form</a></div>
+    </div>
+</body>
+</html>

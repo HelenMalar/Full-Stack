@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Weather Checker</h2>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+        <div class="result" id="result"></div>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+    <script>
+        async function getWeather() {
+            const city = document.getElementById("city").value;
+            const res = await fetch(`/api/weather/${city}`);
+            const data = await res.json();
+            document.getElementById("result").innerText =JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>

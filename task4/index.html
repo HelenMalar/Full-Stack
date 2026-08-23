@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic App</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 20px; }
+        .hidden { display: none; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .strength-meter { height: 8px; width: 100%; background: #ddd; border-radius: 4px; margin-top: 5px; overflow: hidden; }
+        .strength-bar { height: 100%; width: 0%; transition: all 0.3s ease; }
+        .weak { background: #ff4d4d; width: 33%; }
+        .medium { background: #ffa500; width: 66%; }
+        .strong { background: #2ecc71; width: 100%; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+        button:disabled { background: #ccc; }
+        nav { margin-bottom: 20px; text-align: center; }
+        nav a { margin: 0 10px; text-decoration: none; color: #3498db; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#signup">Sign Up</a>
+        <a href="#dashboard">Dashboard</a>
+    </nav>
+    <div id="app" class="container">
+        </div>
+    <script src="script.js">
+    </script>
+</body>
+</html>

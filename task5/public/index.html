@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRUD API Integration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+<h2>Product Manager</h2>
+<input type="text" id="itemInput" placeholder="Enter item name">
+<button onclick="addItem()">Add Item</button>
+<ul id="itemList"></ul></div>
+<script>
+const API_URL = "http://localhost:3000/api/items";
+async function fetchItems() {
+  const res = await fetch(API_URL);
+  const data = await res.json(); 
+  const list = document.getElementById("itemList");
+  list.innerHTML = "";
+  data.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${item.name}
+      <button onclick="editItem(${item.id})">Edit</button>
+      <button onclick="deleteItem(${item.id})">Delete</button>
+    `;
+    list.appendChild(li);
+  });
+}
+async function addItem() {
+  const name = document.getElementById("itemInput").value;
+  await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name })
+  });
+  document.getElementById("itemInput").value = "";
+  fetchItems();
+}
+async function editItem(id) {
+  const newName = prompt("Enter new name:");
+  if (!newName) return;
+  await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: newName })
+  });
+  fetchItems();
+}
+async function deleteItem(id) {
+  await fetch(`${API_URL}/${id}`, {
+    method: "DELETE"
+  });
+  fetchItems();
+}
+fetchItems();
+</script>
+</body>
+</html>

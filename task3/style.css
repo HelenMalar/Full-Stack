@@ -1,0 +1,57 @@
+:root {
+  --accent-color: #00d4ff;
+  --bg-gradient: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+}
+body {
+  background: var(--bg-gradient);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.8s ease;
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+.glass-panel:hover {
+  transform: scale(1.01);
+  border-color: var(--accent-color);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.discovery-entry {
+  animation: slideIn 0.5s ease forwards;
+  border-left: 3px solid var(--accent-color);
+  background: rgba(0, 212, 255, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 0 10px 10px 0;
+}
+.coord-indicator {
+  height: 4px;
+  width: 0;
+  transition: width 0.5s, background 0.5s;
+  margin-top: 5px;
+}
+.btn-space {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+}
+.btn-space:hover:not(:disabled) {
+  background: var(--accent-color);
+  color: #000;
+  box-shadow: 0 0 20px var(--accent-color);
+}
+.nav-link { color: #fff !important; opacity: 0.6; }
+.nav-link.active { opacity: 1; border-bottom: 2px solid var(--accent-color); }
